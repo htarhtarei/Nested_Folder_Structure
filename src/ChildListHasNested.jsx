@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from 'react-i
 const ChildListHasNested = ({hasChildren,index,list}) => {
     const [isClick , setIsClick] = useState({})
 
-    const dynamicText = (hasChildren,index) => {
+    const dynamicUpAndDownArrow = (hasChildren,index) => {
         if (!hasChildren) return null;
         return isClick[index] ? 
             <MdOutlineKeyboardArrowDown className="text-lg" />
@@ -23,15 +23,15 @@ const ChildListHasNested = ({hasChildren,index,list}) => {
     return (
         <div className="font-semibold ms-2">
             <div className="flex items-center my-1" onClick={()=>handleClick(index)}>
-                {dynamicText(hasChildren,index)}
+                {dynamicUpAndDownArrow(hasChildren,index)}
                 <span className={`${isClick[index] ? "underline" : ""}`}>
                     {list.label}
                 </span>
             </div>
             {isClick[index] && (
                 <ul className="ms-12">
-                    {list.children.map((item) => (
-                        <li key={item.label}>{item.label}</li>
+                    {list.children.map((item,index) => (
+                        <li key={index}>{item.label}</li>
                     ))}
                 </ul>
             )}
